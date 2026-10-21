@@ -28,6 +28,6 @@ staticClients:
 enablePasswordDB: true
 staticPasswords:
   - email: $DEX_ADMIN_EMAIL
-    hash: $DEX_ADMIN_HASH
+    hashFromEnv: DEX_ADMIN_HASH
     username: admin
     userID: "7d1a5c2e-6b1f-4a8e-9c35-0b0e1b2c3d4e"
