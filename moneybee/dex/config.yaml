@@ -1,16 +1,16 @@
 # Dex OIDC provider for MoneyBee Compliance (login for the Marble app)
-# Secrets come from Railway variables via env expansion.
-issuer: $DEX_ISSUER
+# Values are templated from environment variables by the image entrypoint (gomplate).
+issuer: {{ getenv "DEX_ISSUER" }}
 storage:
   type: sqlite3
   config:
     file: /var/dex/dex.db
 web:
-  http: 0.0.0.0:$PORT
+  http: 0.0.0.0:{{ getenv "PORT" "10000" }}
 frontend:
   issuer: MoneyBee Compliance
   theme: dark
-  logoURL: $DEX_LOGO_URL
+  logoURL: {{ getenv "DEX_LOGO_URL" "" }}
 oauth2:
   skipApprovalScreen: true
   responseTypes: [code]
@@ -22,12 +22,12 @@ expiry:
 staticClients:
   - id: moneybee-compliance
     name: MoneyBee Compliance
-    secret: $DEX_CLIENT_SECRET
+    secret: {{ getenv "DEX_CLIENT_SECRET" }}
     redirectURIs:
-      - $DEX_REDIRECT_URI
+      - {{ getenv "DEX_REDIRECT_URI" }}
 enablePasswordDB: true
 staticPasswords:
-  - email: $DEX_ADMIN_EMAIL
+  - email: {{ getenv "DEX_ADMIN_EMAIL" }}
     hashFromEnv: DEX_ADMIN_HASH
     username: admin
     userID: "7d1a5c2e-6b1f-4a8e-9c35-0b0e1b2c3d4e"
