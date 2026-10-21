@@ -19,7 +19,6 @@ COPY moneybee/rebrand.py /moneybee/rebrand.py
 COPY moneybee/brand /moneybee/brand
 RUN python3 /moneybee/rebrand.py /src
 RUN bun install --frozen-lockfile
-RUN bun run -F ui-icons generate-icons
 # Heap cap keeps the server bundling step inside an 8 GB builder
 RUN cd packages/app-builder && NODE_OPTIONS=--max-old-space-size=5000 VITE_CJS_IGNORE_WARNING=1 bun run build
 

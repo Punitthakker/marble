@@ -106,6 +106,9 @@ edit(ROOT_ROUTE, sub1(r"(\{ rel: 'stylesheet', href: '/fonts/Inter/inter.css' \}
 # ---------------------------------------------------------------- logos + favicons
 for f in (BRAND / 'logos').iterdir():
     shutil.copy(f, PKG / 'ui-icons/svgs/logos' / f.name)
+# Pre-generated logo sprite (svg-sprite output for the files above). Regenerate with
+# `bun run -F ui-icons generate-icons` under Node when the logos or Marble version change.
+shutil.copy(BRAND / 'logos-svg-sprite.svg', PKG / 'ui-icons/src/generated/logos-svg-sprite.svg')
 for f in (BRAND / 'favicons').iterdir():
     target = APP / 'public' / ('favicon.ico' if f.name == 'favicon.ico' else f'favicons/{f.name}')
     shutil.copy(f, target)
