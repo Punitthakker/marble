@@ -1,0 +1,1 @@
+import{r as s,j as n,ac as r}from"./index-wiWOH3rY.js";const e=r("OrganizationDetails");function x({org:t,currentUser:a,children:i}){const o=s.useMemo(()=>({org:t,currentUser:a}),[t,a]);return n.jsx(e.Provider,{value:o,children:i})}const l=()=>e.useValue();export{x as O,l as u};

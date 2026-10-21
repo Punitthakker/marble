@@ -1,0 +1,78 @@
+import { Q as jsxRuntimeExports } from "./server.mjs";
+import { S as ScoringSectionLayout } from "./ScoringSectionLayout-BA09Wd-A.mjs";
+import { r as Route$1p } from "./router-KSC-NEr8.mjs";
+import "node:async_hooks";
+import "node:stream";
+import "node:stream/web";
+import "util";
+import "crypto";
+import "async_hooks";
+import "stream";
+import "./get-data-model-BUauY6PR.mjs";
+import "./data-9UajV2HK.mjs";
+import "./query-BmG5BEas.mjs";
+import "./auth-middleware-eNRVfU3l.mjs";
+import "./services-middleware-nMulUXHZ.mjs";
+import "./short-uuid-fTZYJj_k.mjs";
+import "node:crypto";
+import "./logger.server-DV14d0iZ.mjs";
+import "node:os";
+import "node:events";
+import "node:diagnostics_channel";
+import "fs";
+import "events";
+import "path";
+import "assert";
+import "worker_threads";
+import "module";
+import "node:fs";
+import "node:path";
+import "node:url";
+import "url";
+import "buffer";
+import "./data-BXamdbTM.mjs";
+import "./useQuery-Bb0AEcpf.mjs";
+import "./useBaseQuery-BqF2iw7Y.mjs";
+import "./useServerFn-oRH5Nw97.mjs";
+import "./scoring-BqfH8vO5.mjs";
+import "./user-scoring-BtNQ1U6a.mjs";
+import "./ScoringLevelThresholds-Dec01Ypr.mjs";
+import "./useMutation-BOdeDeAR.mjs";
+import "./Tabs-CzpyUi7T.mjs";
+import "./use-callback-ref-DoQNLci-.mjs";
+import "./sharpstate.es-C0BW2AZi.mjs";
+import "./formatDistanceStrict-DEEeAR-Y.mjs";
+import "./display-TKj7AN5a.mjs";
+import "./form-D2XmDKeG.mjs";
+import "./array-BFSjnO9c.mjs";
+import "./useForm-qNQ8S9xN.mjs";
+import "./create-context-k6HmQ6bB.mjs";
+import "./Select-Dg3p9vJ0.mjs";
+import "./isNullish-B8pc8Ntu.mjs";
+import "./Spinner-DmLieYoS.mjs";
+import "./security-headers.server-BdP3HrPp.mjs";
+import "./ThemeContext-DjRULCu0.mjs";
+import "./config--RFGchua.mjs";
+import "./i18n-instance-store-UssbGYOM.mjs";
+import "./data-model-feature-access-D7XsjRz2.mjs";
+import "./feature-access-BSdB6UiC.mjs";
+import "./datetime-insWKNBy.mjs";
+import "./case-detail-middleware-iDVIrW-c.mjs";
+import "./inboxes-D556s0BB.mjs";
+import "./input-validation-D4mgQsey.mjs";
+import "./async-C3pYACua.mjs";
+import "./coerce-UidCu_Sb.mjs";
+import "./files-fO9wUXBf.mjs";
+import "./decisions--eKWwSYj.mjs";
+import "./unique-cniTya2T.mjs";
+import "./graph-pivots-Bblee9BN.mjs";
+import "./scenarios-C5R2TE8p.mjs";
+function UserScoringSectionLayout() {
+  const {
+    settings
+  } = Route$1p.useLoaderData();
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ScoringSectionLayout, { maxRiskLevel: settings?.maxRiskLevel });
+}
+export {
+  UserScoringSectionLayout as component
+};

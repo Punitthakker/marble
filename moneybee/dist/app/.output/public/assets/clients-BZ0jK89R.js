@@ -1,0 +1,1 @@
+import{io as s,j as t,O as e}from"./index-wiWOH3rY.js";import{P as n}from"./PivotTabs-Czasx30Y.js";function p(){const{pivotObjects:o}=s.useRouteContext();return t.jsxs(t.Fragment,{children:[t.jsx(n,{pivots:o,to:"./clients/$pivotValue"}),t.jsx(e,{})]})}export{p as component};

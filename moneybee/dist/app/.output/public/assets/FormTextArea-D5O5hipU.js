@@ -1,0 +1,1 @@
+import{j as o}from"./index-wiWOH3rY.js";import{T as t}from"./TextArea-czPI17Wm.js";const x=function({ref:e,...r}){return o.jsx(t,{ref:e,id:r.name,borderColor:r.valid?"greyfigma-90":"redfigma-47",...r})};export{x as F};

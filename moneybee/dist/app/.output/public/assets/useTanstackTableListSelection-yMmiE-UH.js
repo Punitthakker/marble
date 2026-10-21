@@ -1,0 +1,1 @@
+import{r as l,cn as c}from"./index-wiWOH3rY.js";function u(r,a){const[e,o]=l.useState({}),s=c(t=>a(t)),n=c(()=>r.filter(t=>e[s(t)]));return{hasSelectedRows:n().length>0,setRowSelection:o,rowSelection:e,tableProps:{getRowId:s,onRowSelectionChange:o},selectionProps:{rowSelection:e},getSelectedRows:n}}export{u};

@@ -1,0 +1,1 @@
+import{l as e}from"./graph-BKCenLYy.js";import{q as s,Y as a}from"./index-wiWOH3rY.js";const t=["graph","relations"];function i(){const r=s(e);return a({queryKey:t,queryFn:async()=>r()})}export{t as g,i as u};

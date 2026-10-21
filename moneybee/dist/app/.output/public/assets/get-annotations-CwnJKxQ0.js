@@ -1,0 +1,1 @@
+import{q as r,b_ as o,Y as u}from"./index-wiWOH3rY.js";const i={comments:[],tags:[],files:[],risk_tags:[]},y=(n,t,s=!1,a=!0)=>{const e=r(o);return u({queryKey:["annotations",n,t,s],queryFn:async()=>await e({data:{objectType:n,objectId:t,loadThumbnails:s}})??{annotations:i},enabled:a&&!!n&&!!t})};export{y as u};

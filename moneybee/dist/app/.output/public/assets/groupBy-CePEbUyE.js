@@ -1,0 +1,1 @@
+import{aP as i}from"./index-wiWOH3rY.js";function u(...t){return i(p,t)}const p=(t,c)=>{let e=Object.create(null);for(let o=0;o<t.length;o++){let r=t[o],n=c(r,o,t);if(n!==void 0){let l=e[n];l===void 0?e[n]=[r]:l.push(r)}}return Object.setPrototypeOf(e,Object.prototype),e};export{u as t};

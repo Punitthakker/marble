@@ -1,0 +1,1 @@
+import{aR as t,j as s,aG as e,aH as r}from"./index-wiWOH3rY.js";function n(){const{globalDashbord:a}=t.useLoaderData();return s.jsxs(e.Main,{children:[s.jsx(e.Header,{className:"justify-between",children:s.jsx(r,{})}),s.jsx("iframe",{src:a.src,title:a.title,className:"size-full"})]})}export{n as component};

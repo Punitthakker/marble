@@ -1,0 +1,1 @@
+import{cd as s,cp as e}from"./index-wiWOH3rY.js";const t="List";function r(n=[]){return{id:e(),name:t,constant:void 0,children:n,namedChildren:{}}}function i(n){return n.name===t}function a(n){return i(n)&&n.children.every(s)}export{r as N,a,i};

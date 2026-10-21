@@ -1,0 +1,1 @@
+import{g as r}from"./scoring-CTBrX5qQ.js";import{q as s,Y as n}from"./index-wiWOH3rY.js";const o=(e=!0)=>{const t=s(r);return n({queryKey:["scoring","settings"],queryFn:()=>t(),staleTime:300*1e3,enabled:e})};export{o as u};

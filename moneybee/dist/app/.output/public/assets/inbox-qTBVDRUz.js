@@ -1,0 +1,1 @@
+function s(e,r){return r?e.find(n=>n.id===r)?.sla!=null:e.some(n=>n.sla!=null)}function t(e){switch(e){case"admin":return"settings:inboxes.user_role.admin";case"member":return"settings:inboxes.user_role.member";default:return"settings:inboxes.user_role.unknown"}}export{s as h,t};

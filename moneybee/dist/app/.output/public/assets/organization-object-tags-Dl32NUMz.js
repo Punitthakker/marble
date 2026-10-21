@@ -1,0 +1,1 @@
+import{r as s,j as i,ac as c}from"./index-wiWOH3rY.js";const a=c("OrganizationTags");function u({tags:t,children:r}){const o=s.useMemo(()=>{const n=new Map(t.map(e=>[e.id,e]));return{orgObjectTags:t,getTagById:e=>n.get(e)}},[t]);return i.jsx(a.Provider,{value:o,children:r})}const O=()=>a.useValue();export{u as O,O as u};

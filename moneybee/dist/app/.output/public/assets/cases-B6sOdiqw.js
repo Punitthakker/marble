@@ -1,0 +1,1 @@
+import{aS as o,j as a,aT as s,O as r}from"./index-wiWOH3rY.js";function d(){const{dataModel:t,dataModelFeatureAccess:e}=o.useLoaderData();return a.jsx(s,{dataModel:t,dataModelFeatureAccess:e,children:a.jsx(r,{})})}export{d as component};

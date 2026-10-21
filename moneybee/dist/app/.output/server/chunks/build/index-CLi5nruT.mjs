@@ -1,0 +1,61 @@
+import { Q as jsxRuntimeExports } from "./server.mjs";
+import { b as captureException } from "./services-middleware-nMulUXHZ.mjs";
+import { E as ErrorComponent } from "./router-KSC-NEr8.mjs";
+import { p as paginationSchema, d as decisionFiltersSchema } from "./decisions--eKWwSYj.mjs";
+import { M as intersection } from "./short-uuid-fTZYJj_k.mjs";
+import "node:async_hooks";
+import "node:stream";
+import "node:stream/web";
+import "util";
+import "crypto";
+import "async_hooks";
+import "stream";
+import "node:crypto";
+import "./query-BmG5BEas.mjs";
+import "./security-headers.server-BdP3HrPp.mjs";
+import "./Tabs-CzpyUi7T.mjs";
+import "./use-callback-ref-DoQNLci-.mjs";
+import "./sharpstate.es-C0BW2AZi.mjs";
+import "./formatDistanceStrict-DEEeAR-Y.mjs";
+import "./ThemeContext-DjRULCu0.mjs";
+import "./config--RFGchua.mjs";
+import "./i18n-instance-store-UssbGYOM.mjs";
+import "./auth-middleware-eNRVfU3l.mjs";
+import "./logger.server-DV14d0iZ.mjs";
+import "node:os";
+import "node:events";
+import "node:diagnostics_channel";
+import "fs";
+import "events";
+import "path";
+import "assert";
+import "worker_threads";
+import "module";
+import "node:fs";
+import "node:path";
+import "node:url";
+import "url";
+import "buffer";
+import "./data-model-feature-access-D7XsjRz2.mjs";
+import "./feature-access-BSdB6UiC.mjs";
+import "./datetime-insWKNBy.mjs";
+import "./create-context-k6HmQ6bB.mjs";
+import "./case-detail-middleware-iDVIrW-c.mjs";
+import "./inboxes-D556s0BB.mjs";
+import "./input-validation-D4mgQsey.mjs";
+import "./async-C3pYACua.mjs";
+import "./coerce-UidCu_Sb.mjs";
+import "./files-fO9wUXBf.mjs";
+import "./unique-cniTya2T.mjs";
+import "./graph-pivots-Bblee9BN.mjs";
+import "./scenarios-C5R2TE8p.mjs";
+intersection(decisionFiltersSchema, paginationSchema);
+const SplitErrorComponent = ({
+  error
+}) => {
+  captureException(error);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorComponent, { error });
+};
+export {
+  SplitErrorComponent as errorComponent
+};

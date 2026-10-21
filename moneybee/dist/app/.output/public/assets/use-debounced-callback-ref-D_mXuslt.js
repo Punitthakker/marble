@@ -1,0 +1,1 @@
+import{az as c}from"./index-wiWOH3rY.js";function r(n,t){let e;return((...u)=>{clearTimeout(e),e=setTimeout(()=>n(...u),t)})}function f(n,t){const e=c.useRef(void 0);e.current=n;const u=c.useRef(void 0);return c.useEffect(()=>{u.current=r(((...o)=>e.current?.(...o)),t)},[t]),c.useMemo(()=>((...o)=>u.current?.(...o)),[])}export{f as u};

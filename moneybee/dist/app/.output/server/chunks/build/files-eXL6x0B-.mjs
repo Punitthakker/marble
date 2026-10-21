@@ -1,0 +1,180 @@
+import { Q as jsxRuntimeExports, M as reactExports } from "./server.mjs";
+import { u as useDownloadFile, A as AlreadyDownloadingError, a as AuthRequestError } from "./DownloadFilesService-B8XCR5JY.mjs";
+import { u as useTranslation, T as Trans, a as useFormatDateTime, aF as useVirtualTable, aD as Table, B as Button } from "./Tabs-CzpyUi7T.mjs";
+import { z as zt } from "./create-context-k6HmQ6bB.mjs";
+import { u as useUploadScreeningFile, U as UploadFile } from "./upload-screening-file-B1nEkCUG.mjs";
+import { c as createColumnHelper } from "./columnHelper-dCJ-kjEm.mjs";
+import { t as t$g } from "./services-middleware-nMulUXHZ.mjs";
+import { b5 as Route$5 } from "./router-KSC-NEr8.mjs";
+import "node:async_hooks";
+import "node:stream";
+import "node:stream/web";
+import "util";
+import "crypto";
+import "async_hooks";
+import "stream";
+import "./download-file-C533i5xX.mjs";
+import "./short-uuid-fTZYJj_k.mjs";
+import "./use-callback-ref-DoQNLci-.mjs";
+import "./sharpstate.es-C0BW2AZi.mjs";
+import "./formatDistanceStrict-DEEeAR-Y.mjs";
+import "./LoaderRevalidatorContext-BEuG7sHs.mjs";
+import "./useFormDropzone-DXcqE7tO.mjs";
+import "./index-CBe2FUD4.mjs";
+import "./Modal-CpYmGWjB.mjs";
+import "./hasAtLeast-BmuNoqMd.mjs";
+import "./screenings-C_YbbaUO.mjs";
+import "./query-BmG5BEas.mjs";
+import "./auth-middleware-eNRVfU3l.mjs";
+import "./logger.server-DV14d0iZ.mjs";
+import "node:os";
+import "node:events";
+import "node:diagnostics_channel";
+import "fs";
+import "events";
+import "path";
+import "assert";
+import "worker_threads";
+import "module";
+import "node:fs";
+import "node:path";
+import "node:url";
+import "url";
+import "buffer";
+import "./coerce-UidCu_Sb.mjs";
+import "./useMutation-BOdeDeAR.mjs";
+import "./useServerFn-oRH5Nw97.mjs";
+import "node:crypto";
+import "./security-headers.server-BdP3HrPp.mjs";
+import "./ThemeContext-DjRULCu0.mjs";
+import "./config--RFGchua.mjs";
+import "./i18n-instance-store-UssbGYOM.mjs";
+import "./data-model-feature-access-D7XsjRz2.mjs";
+import "./feature-access-BSdB6UiC.mjs";
+import "./datetime-insWKNBy.mjs";
+import "./case-detail-middleware-iDVIrW-c.mjs";
+import "./inboxes-D556s0BB.mjs";
+import "./input-validation-D4mgQsey.mjs";
+import "./async-C3pYACua.mjs";
+import "./files-fO9wUXBf.mjs";
+import "./decisions--eKWwSYj.mjs";
+import "./unique-cniTya2T.mjs";
+import "./graph-pivots-Bblee9BN.mjs";
+import "./scenarios-C5R2TE8p.mjs";
+function t(...t2) {
+  return t$g(n, t2);
+}
+const n = (e) => e.at(-1);
+function AddYourFirstFile({
+  children,
+  uploadFileEndpoint
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(UploadFile, { uploadFileEndpoint, children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "hover:text-purple-primary text-purple-disabled hover:underline", children }) });
+}
+const columnHelper = createColumnHelper();
+function FilesList({ files, downloadEndpoint, uploadEndpoint }) {
+  const { t: t2 } = useTranslation(["cases"]);
+  if (files.length === 0) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-surface-card border-grey-border rounded-lg border p-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-grey-secondary text-s whitespace-pre", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Trans,
+      {
+        t: t2,
+        i18nKey: "cases:case_detail.no_files",
+        components: {
+          Button: /* @__PURE__ */ jsxRuntimeExports.jsx(AddYourFirstFile, { uploadFileEndpoint: uploadEndpoint })
+        }
+      }
+    ) }) });
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(FilesListTable, { downloadEndpoint, files });
+}
+function FilesListTable({ files, downloadEndpoint }) {
+  const { t: t$12 } = useTranslation(["cases"]);
+  const formatDateTime = useFormatDateTime();
+  const columns = reactExports.useMemo(() => {
+    const columns2 = [
+      columnHelper.accessor((row) => row.fileName, {
+        id: "file_name",
+        header: t$12("cases:case.file.name"),
+        size: 100
+      }),
+      columnHelper.accessor((row) => row.fileName, {
+        id: "extension",
+        size: 40,
+        header: t$12("cases:case.file.extension"),
+        cell: ({ getValue }) => {
+          return t(getValue().split("."))?.toUpperCase();
+        }
+      }),
+      columnHelper.accessor((row) => row.createdAt, {
+        id: "created_at",
+        header: t$12("cases:case.file.added_date"),
+        size: 40,
+        cell: ({ getValue }) => {
+          const dateTime = getValue();
+          return /* @__PURE__ */ jsxRuntimeExports.jsx("time", { dateTime, children: formatDateTime(dateTime, { dateStyle: "short" }) });
+        }
+      }),
+      columnHelper.accessor((row) => row.id, {
+        id: "link",
+        header: t$12("cases:case.file.download"),
+        size: 40,
+        cell: ({ getValue }) => {
+          return /* @__PURE__ */ jsxRuntimeExports.jsx(FileLink, { endpoint: downloadEndpoint(getValue()) });
+        }
+      })
+    ];
+    return columns2;
+  }, [formatDateTime, t$12, downloadEndpoint]);
+  const { table, getBodyProps, rows, getContainerProps } = useVirtualTable({
+    data: files,
+    columns,
+    columnResizeMode: "onChange",
+    enableSorting: false
+  });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Table.Container, { ...getContainerProps(), className: "bg-surface-card max-h-96", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Table.Header, { headerGroups: table.getHeaderGroups() }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Table.Body, { ...getBodyProps(), children: rows.map((row) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Table.Row, { row }, row.id);
+    }) })
+  ] });
+}
+function FileLink({ endpoint }) {
+  const { downloadCaseFile, downloadingCaseFile } = useDownloadFile(endpoint, {
+    onError: (e) => {
+      if (e instanceof AlreadyDownloadingError) {
+        return;
+      } else if (e instanceof AuthRequestError) {
+        zt.error(t2("cases:case.file.errors.downloading_link.auth_error"));
+      } else {
+        zt.error(t2("cases:case.file.errors.downloading_link.unknown"));
+      }
+    }
+  });
+  const { t: t2 } = useTranslation(["cases"]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Button,
+    {
+      variant: "secondary",
+      onClick: () => {
+        void downloadCaseFile();
+      },
+      name: "download",
+      disabled: downloadingCaseFile,
+      children: downloadingCaseFile ? t2("cases:case.file.downloading") : t2("cases:case.file.download")
+    }
+  );
+}
+function ScreeningFilesPage() {
+  const {
+    files,
+    screening
+  } = Route$5.useLoaderData();
+  const {
+    mutateAsync: uploadScreeningFile
+  } = useUploadScreeningFile(screening.id);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(FilesList, { files, downloadEndpoint: (fileId) => `/ressources/screenings/download/${screening.id}/${fileId}`, uploadEndpoint: uploadScreeningFile });
+}
+export {
+  ScreeningFilesPage as component
+};

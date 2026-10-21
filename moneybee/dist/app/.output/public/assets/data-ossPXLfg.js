@@ -1,0 +1,1 @@
+import{aU as o,j as a,aG as s,aT as n,O as r}from"./index-wiWOH3rY.js";function i(){const{dataModel:e,dataModelFeatureAccess:t}=o.useLoaderData();return a.jsx(s.Main,{className:"min-h-0 overflow-hidden",children:a.jsx(n,{dataModel:e,dataModelFeatureAccess:t,children:a.jsx(r,{})})})}export{i as component};

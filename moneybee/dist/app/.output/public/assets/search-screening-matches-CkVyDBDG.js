@@ -1,0 +1,1 @@
+import{k as a,m as s}from"./screenings-BE1he6Up.js";import{q as t,t as r}from"./index-wiWOH3rY.js";const o=()=>{const e=t(a);return r({mutationFn:async n=>e({data:n})})},u=()=>{const e=t(s);return r({mutationFn:async n=>e({data:n})})};export{o as a,u};

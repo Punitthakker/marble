@@ -1,0 +1,1 @@
+import{g as t}from"./graph-BKCenLYy.js";import{q as n,Y as u}from"./index-wiWOH3rY.js";function f(e,r=!0){const s=n(t);return u({queryKey:["graph","generate",e.recordType,e.recordId,e.degrees,e.types,e.skip_same_field_relations,e.same_field_relations],queryFn:async()=>s({data:e}),enabled:r&&!!e.recordType&&!!e.recordId,refetchOnWindowFocus:!1,retry:!1})}export{f as u};

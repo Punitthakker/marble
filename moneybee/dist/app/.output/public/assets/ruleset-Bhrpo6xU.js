@@ -1,0 +1,1 @@
+const a=["customer_features","service_provided","distribution_channels","transaction_execution","geo_risks"],r={days:86400,months:2592e3,years:31536e3};function e(t){return t===0?{value:0,unit:null}:t%r.years===0?{value:t/r.years,unit:"years"}:t%r.months===0?{value:t/r.months,unit:"months"}:{value:t/r.days,unit:"days"}}export{a as R,r as S,e as s};

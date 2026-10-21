@@ -1,0 +1,1 @@
+import{r as a}from"./index-wiWOH3rY.js";import{u as f}from"./use-callback-ref-CfOUlbpf.js";function k(r){const[o,e]=a.useState(!1),[c,t]=a.useState(),[l,n]=a.useState(),s=f(r);return[a.useCallback(async(...u)=>{try{e(!0),t(void 0),n(await s(...u))}catch(i){t(i)}finally{e(!1)}},[s]),{loading:o,error:c,value:l}]}export{k as u};
