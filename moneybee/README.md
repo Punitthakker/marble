@@ -23,23 +23,24 @@ compliance operations only** (monitoring MoneyBee's own merchants and transactio
 | `dex/` | Dex OIDC login service (Marble supports OIDC, so no Firebase is needed). |
 | `site/` | MoneyBee Compliance public website (Netlify). |
 
-## Railway services (project `moneybee-compliance`)
+## Render services (workspace "My Workspace", region Frankfurt)
 
 | Service | Source | Notes |
 |---|---|---|
-| PostGIS | `postgis` template | Marble requires PostGIS |
-| Redis | `redis` template | Cache |
-| dex | `moneybee/dex/Dockerfile` | Volume at `/var/dex` |
-| api | image `europe-west1-docker.pkg.dev/marble-infra/marble/marble-backend:<tag>` | Start: `/app --migrations --server` |
-| worker | same image | Start: `/app --worker` |
-| app | `moneybee/Dockerfile.front` | Public UI |
+| moneybee-compliance-db | Render Postgres 17 | PostGIS and other extensions are created by Marble's migrations |
+| moneybee-compliance-auth | `moneybee/dex/Dockerfile` | Dex OIDC login |
+| moneybee-compliance-api | `moneybee/Dockerfile.api` | Wraps the official backend image; runs migrations, then API server and worker together (`api-entrypoint.sh`) |
+| moneybee-compliance-app | `moneybee/Dockerfile.front` | MoneyBee-branded UI |
+
+Redis is optional in this Marble version and is not deployed. File storage uses local paths, which are
+ephemeral on Render; move to an S3 bucket before relying on case-file uploads.
 
 Sanctions screening (OpenSanctions/yente + Elasticsearch, about 2 GB RAM) is not deployed yet;
 add it, or use the OpenSanctions hosted API via `OPENSANCTIONS_API_KEY`, when screening goes live.
 
 ## Upgrading Marble
 
-1. Bump the backend image tag on `api` and `worker` (match `docker-compose.yaml` upstream).
+1. Bump `MARBLE_VERSION` in `Dockerfile.api` (match the backend tag in upstream `docker-compose.yaml`).
 2. Bump `FRONT_VERSION` in `Dockerfile.front` to the matching frontend tag.
 3. Deploy. If `rebrand.py` fails, an upstream file it patches changed; update the pattern.
 

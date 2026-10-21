@@ -1,0 +1,16 @@
+# MoneyBee Compliance - Marble backend (API + worker in one container) for Render
+# Wraps the official prebuilt image; bump MARBLE_VERSION to upgrade.
+ARG MARBLE_VERSION=v1.11.0
+FROM europe-west1-docker.pkg.dev/marble-infra/marble/marble-backend:${MARBLE_VERSION} AS marble
+
+FROM debian:bookworm-slim
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=marble /app /app
+COPY --from=marble /zoneinfo.zip /zoneinfo.zip
+ENV ZONEINFO=/zoneinfo.zip
+COPY moneybee/api-entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+EXPOSE 8080
+CMD ["/entrypoint.sh"]
