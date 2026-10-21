@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MoneyBee Compliance</title>
+<meta name="description" content="Real-time transaction monitoring, screening and case management behind every MoneyBee payment.">
+<meta name="theme-color" content="#14120E">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/fonts/inter-tight.css">
+<style>
+:root{
+  --ink:#14120E;--ink2:#1B1914;--ink3:#24211A;--ink4:#312C23;
+  --iv:#F5EFE3;--iv7:rgba(245,239,227,.70);--iv5:rgba(245,239,227,.55);--iv2:rgba(245,239,227,.14);--iv1:rgba(245,239,227,.07);
+  --taupe:#A39A8B;--hn:#DDA85A;--hn2:#F2CF92;--hnd:#9A6A1F;--paper:#FAF8F2;--ok:#8FC498;--bad:#E58B6E;
+  --sans:'Inter Tight','Helvetica Neue',Arial,sans-serif;--mono:ui-monospace,'JetBrains Mono',Menlo,monospace;
+  --w:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--iv);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eb{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--hn);font-weight:500;margin-bottom:16px}
+h1,h2,h3{font-weight:400;letter-spacing:-.045em;line-height:1.02;margin:0}
+h1{font-size:clamp(46px,7.6vw,96px)}
+h2{font-size:clamp(34px,4.8vw,60px)}
+h3{font-size:24px;letter-spacing:-.025em;line-height:1.15;font-weight:500}
+.t{color:var(--taupe)}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--iv7);max-width:620px}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:99px;font-size:16px;font-weight:500;transition:transform .15s ease,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.p{background:var(--hn);color:var(--ink)}
+.btn.p:hover{background:var(--hn2)}
+.btn.g{box-shadow:inset 0 0 0 1.5px var(--iv2)}
+.btn.g:hover{background:var(--iv1)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(20,18,14,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--iv1)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;letter-spacing:-.055em}
+.brand small{font-weight:400;color:var(--taupe);letter-spacing:-.02em;font-size:16px}
+.links{display:flex;gap:30px;font-size:15px;color:var(--iv7)}
+.links a:hover{color:var(--iv)}
+.navcta{display:flex;gap:10px}
+.navcta .btn{height:42px;padding:0 18px;font-size:14px}
+@media(max-width:900px){.links{display:none}}
+@media(max-width:520px){.navcta .g{display:none}.brand small{display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:110px 0 90px}
+.hex{position:absolute;inset:0;opacity:.5;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='180' viewBox='0 0 104 180'%3E%3Cg fill='none' stroke='%23F5EFE3' stroke-opacity='.06' stroke-width='1.2'%3E%3Cpath d='M52 0l52 30v60L52 120 0 90V30z'/%3E%3Cpath d='M52 120l52 30v60M52 120L0 150v60'/%3E%3C/g%3E%3C/svg%3E");mask-image:radial-gradient(ellipse 70% 70% at 70% 30%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 70% at 70% 30%,#000 30%,transparent 75%)}
+.glow{position:absolute;width:780px;height:780px;right:-180px;top:-260px;background:radial-gradient(closest-side,rgba(221,168,90,.22),transparent);pointer-events:none}
+.hero .eb{margin-bottom:22px}
+.hero h1 .h{color:var(--hn)}
+.hero .lead{margin:28px 0 38px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:54px}
+.chip{font-size:14px;padding:9px 16px;border-radius:99px;box-shadow:inset 0 0 0 1.5px rgba(221,168,90,.4);color:var(--iv7)}
+
+/* live feed */
+.feed{margin-top:70px;border-radius:24px;background:var(--ink2);box-shadow:inset 0 0 0 1.5px var(--iv2);overflow:hidden}
+.feed-h{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--iv1);font-size:14px;color:var(--iv5)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:8px;box-shadow:0 0 0 4px rgba(143,196,152,.18);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(143,196,152,0)}}
+.rows{font-size:15px}
+.row{display:grid;grid-template-columns:110px 1.4fr 1fr 120px 130px;gap:16px;align-items:center;padding:14px 24px;border-bottom:1px solid var(--iv1);animation:in .5s ease both}
+.row:last-child{border-bottom:0}
+.row .m{color:var(--iv5);font-size:13px}
+.tag{justify-self:start;font-family:var(--mono);font-size:12px;font-weight:600;padding:5px 10px;border-radius:8px;color:var(--ink)}
+.tag.ok{background:var(--ok)}.tag.rv{background:var(--hn)}.tag.bl{background:var(--bad)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+@media(max-width:760px){.row{grid-template-columns:1fr auto;gap:4px 12px}.row .c3,.row .c4{display:none}}
+.feed-f{padding:12px 24px;font-size:12px;color:var(--iv5);border-top:1px solid var(--iv1)}
+
+section{padding:110px 0}
+.sh{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
+.sh .lead{justify-self:end}
+@media(max-width:860px){.sh{grid-template-columns:1fr}.sh .lead{justify-self:start}}
+
+/* pillars */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:1000px){.grid4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid4{grid-template-columns:1fr}}
+.card{border-radius:22px;background:var(--ink2);box-shadow:inset 0 0 0 1.5px var(--iv2);padding:28px;display:flex;flex-direction:column;gap:14px;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:inset 0 0 0 1.5px rgba(221,168,90,.55);transform:translateY(-2px)}
+.card .n{font-family:var(--mono);font-size:13px;color:var(--hn)}
+.card p{margin:0;color:var(--iv7);font-size:15px}
+.card ul{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--iv5)}
+.card li::before{content:'';display:inline-block;width:6px;height:6px;border-radius:2px;background:var(--hn);margin-right:10px;vertical-align:2px}
+
+/* rule builder */
+.split{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+@media(max-width:940px){.split{grid-template-columns:1fr}}
+.rule{border-radius:24px;background:var(--paper);color:var(--ink);padding:28px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+.rule-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.rule-h b{font-size:20px;letter-spacing:-.03em}
+.score{font-family:var(--mono);font-size:13px;background:var(--hn);padding:6px 12px;border-radius:8px;font-weight:600}
+.cond{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:14px 16px;border-radius:14px;background:#F1ECE1;margin-bottom:10px;font-size:15px}
+.cond .k{font-family:var(--mono);font-size:13px;padding:4px 9px;border-radius:7px;background:#fff;box-shadow:inset 0 0 0 1px rgba(20,18,14,.12)}
+.cond .op{color:var(--hnd);font-weight:600}
+.and{font-family:var(--mono);font-size:12px;color:rgba(20,18,14,.5);margin:4px 0 10px 16px}
+.out{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.out span{font-size:13px;padding:7px 12px;border-radius:99px;box-shadow:inset 0 0 0 1.5px rgba(20,18,14,.15)}
+.out span.on{background:var(--ink);color:var(--paper);box-shadow:none}
+.rule-f{margin-top:14px;font-size:12px;color:rgba(20,18,14,.5)}
+.points{display:flex;flex-direction:column;gap:26px;margin-top:36px}
+.pt{display:grid;grid-template-columns:44px 1fr;gap:16px}
+.pt i{width:44px;height:44px;border-radius:12px;background:var(--ink3);box-shadow:inset 0 0 0 1.5px var(--iv2);display:grid;place-items:center;font-style:normal;color:var(--hn);font-family:var(--mono);font-size:14px}
+.pt b{display:block;font-weight:500;font-size:18px;letter-spacing:-.02em}
+.pt span{color:var(--iv7);font-size:15px}
+
+/* typologies */
+.typ{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--iv1);border-radius:22px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--iv1)}
+@media(max-width:900px){.typ{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.typ{grid-template-columns:1fr}}
+.typ div{background:var(--ink);padding:30px 28px}
+.typ h3{font-size:20px;margin-bottom:10px}
+.typ p{margin:0;color:var(--iv7);font-size:15px}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;counter-reset:s}
+@media(max-width:1000px){.flow{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.flow{grid-template-columns:1fr}}
+.step{position:relative;padding:24px;border-radius:20px;background:var(--ink2);box-shadow:inset 0 0 0 1.5px var(--iv2)}
+.step::before{counter-increment:s;content:'0' counter(s);font-family:var(--mono);font-size:13px;color:var(--hn);display:block;margin-bottom:28px}
+.step b{display:block;font-weight:500;font-size:18px;letter-spacing:-.02em;margin-bottom:6px}
+.step span{font-size:14px;color:var(--iv7)}
+.step.hl{background:var(--hn);color:var(--ink);box-shadow:none}
+.step.hl::before,.step.hl span{color:rgba(20,18,14,.7)}
+pre{margin:40px 0 0;padding:24px;border-radius:20px;background:#0C0B08;box-shadow:inset 0 0 0 1.5px var(--iv2);overflow-x:auto;font-family:var(--mono);font-size:13.5px;line-height:1.7;color:var(--iv7)}
+pre .c{color:var(--taupe)}pre .s{color:var(--hn2)}pre .k{color:var(--hn)}
+
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.trust{grid-template-columns:1fr}}
+.tr{padding:30px;border-radius:22px;background:var(--ink2);box-shadow:inset 0 0 0 1.5px var(--iv2)}
+.tr h3{margin:14px 0 10px}
+.tr p{margin:0;color:var(--iv7);font-size:15px}
+.ic{width:46px;height:46px}
+
+/* cta */
+.cta{border-radius:32px;background:var(--hn);color:var(--ink);padding:clamp(40px,6vw,80px);position:relative;overflow:hidden}
+.cta h2{max-width:760px}
+.cta p{font-size:19px;max-width:620px;color:rgba(20,18,14,.75);margin:22px 0 34px}
+.cta .btn.p{background:var(--ink);color:var(--iv)}
+.cta .btn.g{box-shadow:inset 0 0 0 1.5px rgba(20,18,14,.3)}
+.cta svg{position:absolute;right:-60px;bottom:-80px;width:360px;opacity:.16}
+
+footer{padding:70px 0 50px;border-top:1px solid var(--iv1);margin-top:110px;font-size:14px;color:var(--iv5)}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+@media(max-width:800px){.fg{grid-template-columns:1fr 1fr}}
+.fg b{display:block;color:var(--iv);font-weight:500;margin-bottom:12px}
+.fg a{display:block;margin-bottom:8px}
+.fg a:hover{color:var(--iv)}
+.legal{margin-top:50px;padding-top:24px;border-top:1px solid var(--iv1);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12.5px}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.reveal.v{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="MoneyBee Compliance home">
+      <svg width="32" height="32" viewBox="0 0 80 80" aria-hidden="true"><rect width="80" height="80" rx="17.6" fill="#DDA85A"/><polygon points="51.78,33.2 51.78,46.8 40,53.6 28.22,46.8 28.22,33.2 40,26.4" fill="#14120E"/><polygon points="45.2,37 45.2,43 40,46 34.8,43 34.8,37 40,34" fill="#DDA85A"/></svg>
+      moneybee <small>compliance</small>
+    </a>
+    <div class="links">
+      <a href="#platform">Platform</a><a href="#monitoring">Monitoring</a><a href="#typologies">Typologies</a><a href="#api">How it works</a><a href="#trust">Governance</a>
+    </div>
+    <div class="navcta">
+      <a class="btn g" href="__APP_URL__">Team sign in</a>
+      <a class="btn p" href="#contact">Request our AML pack</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hex"></div><div class="glow"></div>
+  <div class="wrap">
+    <div class="eb">MoneyBee Compliance</div>
+    <h1>Every payment,<br><span class="t">checked as it </span><span class="h">moves.</span></h1>
+    <p class="lead">The transaction monitoring, screening and case management layer behind every MoneyBee payment. Built for the UAE, run by our compliance team, and designed to give banks, schemes and partners confidence in the flows we process.</p>
+    <div class="ctas">
+      <a class="btn p" href="#contact">Request our AML pack →</a>
+      <a class="btn g" href="#platform">See how it works</a>
+    </div>
+    <div class="chips">
+      <span class="chip">Real-time decisions</span><span class="chip">Sanctions and PEP screening</span><span class="chip">No-code scenarios</span><span class="chip">Case management</span><span class="chip">Full audit trail</span>
+    </div>
+
+    <div class="feed reveal" aria-label="Illustrative live decision feed">
+      <div class="feed-h"><span><span class="dot"></span>Live decisions</span><span class="mono">scenario: card-acquiring-uae</span></div>
+      <div class="rows" id="rows"></div>
+      <div class="feed-f">Illustrative data. Merchant names and amounts are examples.</div>
+    </div>
+  </div>
+</header>
+
+<section id="platform">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eb">The platform</div><h2>One workspace for <span class="t">detection, decisions and evidence.</span></h2></div>
+      <p class="lead">Alerts, customer context and the decision trail live in one place, so an analyst can go from a flagged payment to a defensible outcome without switching tools.</p>
+    </div>
+    <div class="grid4">
+      <div class="card reveal"><span class="n">01 / Monitor</span><h3>Scenarios that score every transaction</h3><p>Compliance writes and tunes detection logic directly, then tests it on historical data before it goes live.</p><ul><li>Real-time and scheduled runs</li><li>Velocity, aggregates, thresholds</li><li>Backtesting before release</li></ul></div>
+      <div class="card reveal"><span class="n">02 / Screen</span><h3>Names checked against the lists that matter</h3><p>Merchants, beneficial owners and counterparties are screened at onboarding and kept under ongoing monitoring.</p><ul><li>Sanctions and PEP lists</li><li>Fuzzy matching with thresholds</li><li>Alerts when lists change</li></ul></div>
+      <div class="card reveal"><span class="n">03 / Investigate</span><h3>Cases with the full story attached</h3><p>Each alert opens with the triggering rules, the customer's history and every related transaction.</p><ul><li>Inboxes and assignment</li><li>Customer 360 and link analysis</li><li>Comments, files, snooze, escalate</li></ul></div>
+      <div class="card reveal"><span class="n">04 / Report</span><h3>Evidence ready for the regulator</h3><p>Every decision, rule version and analyst action is logged, so an outcome can be explained months later.</p><ul><li>Immutable decision history</li><li>Rule versioning and approvals</li><li>Evidence packs for goAML filings</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="monitoring">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="eb">Monitoring</div>
+      <h2>Rules your analysts <span class="t">own.</span></h2>
+      <p class="lead" style="margin-top:22px">When a new typology appears, the compliance team adjusts a scenario that afternoon. No engineering sprint, no waiting for a release.</p>
+      <div class="points">
+        <div class="pt"><i>A</i><div><b>Build without code</b><span>Combine fields, aggregates and lists into conditions that read like policy.</span></div></div>
+        <div class="pt"><i>B</i><div><b>Test before you ship</b><span>Replay a draft rule on past traffic and see exactly which payments it would have caught.</span></div></div>
+        <div class="pt"><i>C</i><div><b>Approve, then act</b><span>Outcomes map to approve, review or block, and reviews route to the right inbox automatically.</span></div></div>
+      </div>
+    </div>
+    <div class="rule reveal" aria-label="Example detection rule">
+      <div class="rule-h"><b>Rapid low-value card testing</b><span class="score">+60 risk</span></div>
+      <div class="cond"><span class="k">payment.channel</span><span class="op">is</span><span class="k">card_not_present</span></div>
+      <div class="and">AND</div>
+      <div class="cond"><span class="k">count(card.fingerprint)</span><span class="op">in last</span><span class="k">10 min</span><span class="op">≥</span><span class="k">5</span></div>
+      <div class="and">AND</div>
+      <div class="cond"><span class="k">payment.amount</span><span class="op">&lt;</span><span class="k">AED 10</span></div>
+      <div class="out"><span>Approve</span><span class="on">Review</span><span>Block and alert</span></div>
+      <div class="rule-f">Example rule for illustration.</div>
+    </div>
+  </div>
+</section>
+
+<section id="typologies">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eb">Built for UAE payments</div><h2>The patterns <span class="t">we watch for.</span></h2></div>
+      <p class="lead">Our scenarios start from the risks we see in UAE acquiring, payouts and cross-border corridors, with hospitality and retail merchants at the core.</p>
+    </div>
+    <div class="typ reveal">
+      <div><h3>Structuring</h3><p>Repeated payments sized to stay just under reporting or review thresholds.</p></div>
+      <div><h3>Card testing</h3><p>Bursts of tiny card-not-present attempts across many cards or one device.</p></div>
+      <div><h3>Refund abuse</h3><p>Refunds that exceed sales, go to new cards or follow chargeback spikes.</p></div>
+      <div><h3>Transaction laundering</h3><p>Volumes or ticket sizes that don't match a merchant's declared business.</p></div>
+      <div><h3>Mule and pass-through</h3><p>Funds in and straight out, with payouts to fresh or linked beneficiaries.</p></div>
+      <div><h3>High-risk corridors</h3><p>Exposure to sanctioned regions, high-risk jurisdictions or unusual routing.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="api">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eb">How it works</div><h2>From payment to <span class="t">decision in one call.</span></h2></div>
+      <p class="lead">Monitoring sits inside the MoneyBee payment flow. Each event is scored against live scenarios and the decision comes back before the payment completes.</p>
+    </div>
+    <div class="flow">
+      <div class="step reveal"><b>Ingest</b><span>Payment, payout or onboarding event arrives via API.</span></div>
+      <div class="step reveal"><b>Enrich</b><span>Customer, merchant and history pulled from the data model.</span></div>
+      <div class="step hl reveal"><b>Decide</b><span>Scenarios score the event: approve, review or block.</span></div>
+      <div class="step reveal"><b>Investigate</b><span>Reviews open as cases in the right inbox.</span></div>
+      <div class="step reveal"><b>Evidence</b><span>Outcome, rationale and audit trail stored for reporting.</span></div>
+    </div>
+<pre class="reveal"><span class="c"># Score a payment against live scenarios (illustrative)</span>
+POST /v1/decisions
+{
+  <span class="k">"scenario_id"</span>: <span class="s">"card-acquiring-uae"</span>,
+  <span class="k">"trigger_object"</span>: {
+    <span class="k">"object_id"</span>: <span class="s">"txn_8f2c91"</span>,
+    <span class="k">"merchant_id"</span>: <span class="s">"mer_horeca_204"</span>,
+    <span class="k">"amount"</span>: 4.50, <span class="k">"currency"</span>: <span class="s">"AED"</span>,
+    <span class="k">"channel"</span>: <span class="s">"card_not_present"</span>
+  }
+}
+<span class="c"># → { "outcome": "review", "score": 60, "rules_hit": ["Rapid low-value card testing"] }</span></pre>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div><div class="eb">Governance</div><h2>Controls you can <span class="t">inspect.</span></h2></div>
+      <p class="lead">We run monitoring on infrastructure we control, on an open-source engine anyone can audit.</p>
+    </div>
+    <div class="trust">
+      <div class="tr reveal"><svg class="ic" viewBox="0 0 46 46"><rect width="46" height="46" rx="12" fill="#24211A"/><path d="M23 11l10 4v7c0 6.5-4.3 11.5-10 13-5.7-1.5-10-6.5-10-13v-7z" fill="none" stroke="#DDA85A" stroke-width="2"/><path d="M18.5 23l3 3 6-6" fill="none" stroke="#DDA85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Data stays with MoneyBee</h3><p>Self-hosted monitoring. Transaction and customer data is not shared with a third-party monitoring vendor.</p></div>
+      <div class="tr reveal"><svg class="ic" viewBox="0 0 46 46"><rect width="46" height="46" rx="12" fill="#24211A"/><path d="M14 16h18M14 23h18M14 30h11" stroke="#DDA85A" stroke-width="2" stroke-linecap="round"/></svg><h3>Every decision explained</h3><p>Rule versions, scores, analyst notes and outcomes are kept together for internal audit and regulatory review.</p></div>
+      <div class="tr reveal"><svg class="ic" viewBox="0 0 46 46"><rect width="46" height="46" rx="12" fill="#24211A"/><path d="M17 17l-5 6 5 6M29 17l5 6-5 6M25 14l-4 18" fill="none" stroke="#DDA85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Open-source engine</h3><p>Powered by Marble, an open-source transaction monitoring engine whose code can be reviewed line by line.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="cta reveal">
+      <svg viewBox="0 0 80 80"><polygon points="74,20 74,60 40,80 6,60 6,20 40,0" fill="#14120E"/></svg>
+      <h2>Partnering with MoneyBee?</h2>
+      <p>Banks, schemes and partners can request our AML/CFT programme summary, monitoring methodology and a live walkthrough with our compliance team.</p>
+      <div class="ctas">
+        <a class="btn p" href="mailto:pt@moneybee.world?subject=MoneyBee%20AML%20pack%20request">Request the AML pack →</a>
+        <a class="btn g" href="mailto:pt@moneybee.world?subject=MoneyBee%20compliance%20walkthrough">Book a walkthrough</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div><b style="font-size:20px;font-weight:700;letter-spacing:-.055em">moneybee</b><span>The world moves. Move money with it.<br>Dubai, United Arab Emirates</span></div>
+      <div><b>Compliance</b><a href="#platform">Platform</a><a href="#monitoring">Monitoring</a><a href="#typologies">Typologies</a><a href="#trust">Governance</a></div>
+      <div><b>Team</b><a href="__APP_URL__">Sign in</a><a href="#api">How it works</a></div>
+      <div><b>Contact</b><a href="mailto:pt@moneybee.world">pt@moneybee.world</a></div>
+    </div>
+    <div class="legal">
+      <span>© 2026 MoneyBee. All rights reserved.</span>
+      <span>Transaction monitoring powered by <a href="https://github.com/checkmarble/marble" style="text-decoration:underline">Marble</a>, licensed under the Elastic License 2.0. Marble is a trademark of its owner.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const data=[
+    ['14:02:11','Al Wasl Bistro','Card present','AED 186.00','ok','Approve'],
+    ['14:02:12','Marina Coffee Co.','Card not present','AED 4.50','rv','Review'],
+    ['14:02:12','Desert Rose Hotel','Card present','AED 2,340.00','ok','Approve'],
+    ['14:02:13','Souk Electronics','Payout','AED 9,950.00','rv','Review'],
+    ['14:02:14','JBR Grill House','Card present','AED 312.75','ok','Approve'],
+    ['14:02:14','Unknown merchant','Card not present','AED 1.00','bl','Block'],
+    ['14:02:15','Palm Spa & Wellness','Card present','AED 640.00','ok','Approve'],
+    ['14:02:16','Creek Logistics','Cross-border','AED 48,200.00','rv','Review']
+  ];
+  const rows=document.getElementById('rows');let i=0;
+  function row(d){const r=document.createElement('div');r.className='row';
+    r.innerHTML=`<span class="m mono">${d[0]}</span><span>${d[1]}</span><span class="m c3">${d[2]}</span><span class="mono c4">${d[3]}</span><span class="tag ${d[4]}">${d[5]}</span>`;return r;}
+  for(;i<5;i++)rows.appendChild(row(data[i]));
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce)setInterval(()=>{rows.insertBefore(row(data[i++%data.length]),rows.firstChild);if(rows.children.length>5)rows.lastChild.remove();},2200);
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>

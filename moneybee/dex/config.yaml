@@ -1,0 +1,33 @@
+# Dex OIDC provider for MoneyBee Compliance (login for the Marble app)
+# Secrets come from Railway variables via env expansion.
+issuer: $DEX_ISSUER
+storage:
+  type: sqlite3
+  config:
+    file: /var/dex/dex.db
+web:
+  http: 0.0.0.0:$PORT
+frontend:
+  issuer: MoneyBee Compliance
+  theme: dark
+  logoURL: $DEX_LOGO_URL
+oauth2:
+  skipApprovalScreen: true
+  responseTypes: [code]
+expiry:
+  idTokens: 1h
+  refreshTokens:
+    validIfNotUsedFor: 12h
+    absoluteLifetime: 24h
+staticClients:
+  - id: moneybee-compliance
+    name: MoneyBee Compliance
+    secret: $DEX_CLIENT_SECRET
+    redirectURIs:
+      - $DEX_REDIRECT_URI
+enablePasswordDB: true
+staticPasswords:
+  - email: $DEX_ADMIN_EMAIL
+    hash: $DEX_ADMIN_HASH
+    username: admin
+    userID: "7d1a5c2e-6b1f-4a8e-9c35-0b0e1b2c3d4e"
