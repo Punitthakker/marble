@@ -19,7 +19,9 @@ compliance operations only** (monitoring MoneyBee's own merchants and transactio
 |---|---|
 | `rebrand.py` | Applies MoneyBee look and feel to an unmodified Marble frontend checkout. Fails loudly if an upstream file it patches has changed. |
 | `brand/` | MoneyBee logos, favicons, Inter Tight font (OFL). |
-| `Dockerfile.front` | Builds the official frontend at `FRONT_VERSION`, applies the rebrand, outputs the app image. |
+| `Dockerfile.front` | App image from the prebuilt bundle in `dist/app` (builds on small builders). |
+| `Dockerfile.front.source` | Full source build of the official frontend plus rebrand (needs about 8 GB RAM to build). |
+| `build-front.sh` | Rebuilds `dist/app` from a Marble frontend tag with the rebrand applied. |
 | `dex/` | Dex OIDC login service (Marble supports OIDC, so no Firebase is needed). |
 | `site/` | MoneyBee Compliance public website (Netlify). |
 
@@ -30,7 +32,7 @@ compliance operations only** (monitoring MoneyBee's own merchants and transactio
 | moneybee-compliance-db | Render Postgres 17 | PostGIS and other extensions are created by Marble's migrations |
 | moneybee-compliance-auth | `moneybee/dex/Dockerfile` | Dex OIDC login |
 | moneybee-compliance-api | `moneybee/Dockerfile.api` | Wraps the official backend image; runs migrations, then API server and worker together (`api-entrypoint.sh`) |
-| moneybee-compliance-app | `moneybee/Dockerfile.front` | MoneyBee-branded UI |
+| moneybee-compliance-app | `moneybee/Dockerfile.front` | MoneyBee-branded UI (prebuilt bundle) |
 
 Redis is optional in this Marble version and is not deployed. File storage uses local paths, which are
 ephemeral on Render; move to an S3 bucket before relying on case-file uploads.
@@ -41,8 +43,8 @@ add it, or use the OpenSanctions hosted API via `OPENSANCTIONS_API_KEY`, when sc
 ## Upgrading Marble
 
 1. Bump `MARBLE_VERSION` in `Dockerfile.api` (match the backend tag in upstream `docker-compose.yaml`).
-2. Bump `FRONT_VERSION` in `Dockerfile.front` to the matching frontend tag.
-3. Deploy. If `rebrand.py` fails, an upstream file it patches changed; update the pattern.
+2. Run `moneybee/build-front.sh <frontend tag>`, commit `dist/app`, and bump `FRONT_VERSION` in `Dockerfile.front`.
+3. Deploy. Render does not auto-deploy this repo; trigger deploys from the dashboard. If `rebrand.py` fails, an upstream file it patches changed; update the pattern.
 
 ## Adding users
 
