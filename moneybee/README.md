@@ -25,6 +25,21 @@ compliance operations only** (monitoring MoneyBee's own merchants and transactio
 | `dex/` | Dex OIDC login service (Marble supports OIDC, so no Firebase is needed). |
 | `site/` | MoneyBee Compliance public website (Netlify). |
 
+## Run it locally with Docker
+
+Needs Docker Desktop (Mac/Windows) or Docker Engine (Linux), about 4 GB free RAM.
+
+```bash
+cd moneybee/local
+./setup.sh                 # first time: creates secrets and prints your admin login
+docker compose up -d       # first start builds images and takes a few minutes
+```
+
+Open http://localhost:3000 and sign in with the email and password `setup.sh` printed.
+Stop with `docker compose down`; data is kept in Docker volumes (`down -v` deletes it).
+The login service runs at http://dex.localtest.me:5556, a public name that always points to
+your own computer.
+
 ## Render services (workspace "My Workspace", region Frankfurt)
 
 | Service | Source | Notes |
