@@ -31,9 +31,9 @@ x-backend-env: &backend-env
   FIREBASE_AUTH_EMULATOR_HOST: auth.localtest.me:9099
   FIREBASE_PROJECT_ID: test-project
   FIREBASE_API_KEY: local-emulator
-  INGESTION_BUCKET_URL: file:///data/ingestion?create_dir=true
-  CASE_MANAGER_BUCKET_URL: file:///data/case-manager?create_dir=true
-  ANALYTICS_BUCKET_URL: file:///data/analytics?create_dir=true
+  INGESTION_BUCKET_URL: file:///data/ingestion?create_dir=true&no_tmp_dir=true
+  CASE_MANAGER_BUCKET_URL: file:///data/case-manager?create_dir=true&no_tmp_dir=true
+  ANALYTICS_BUCKET_URL: file:///data/analytics?create_dir=true&no_tmp_dir=true
   REDIS_HOST: redis:6379
   DISABLE_SEGMENT: "true"
   DISABLE_TELEMETRY: "true"
