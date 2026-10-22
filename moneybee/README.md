@@ -22,7 +22,8 @@ compliance operations only** (monitoring MoneyBee's own merchants and transactio
 | `Dockerfile.front` | App image from the prebuilt bundle in `dist/app` (builds on small builders). |
 | `Dockerfile.front.source` | Full source build of the official frontend plus rebrand (needs about 8 GB RAM to build). |
 | `build-front.sh` | Rebuilds `dist/app` from a Marble frontend tag with the rebrand applied. |
-| `dex/` | Dex OIDC login service (Marble supports OIDC, so no Firebase is needed). |
+| `local/` | One-command local Docker setup (Firebase Auth emulator for login). |
+| `dex/` | Dex OIDC login service - only usable with a Marble Enterprise (SSO) licence. |
 | `site/` | MoneyBee Compliance public website (Netlify). |
 
 ## Run it locally with Docker
@@ -31,14 +32,17 @@ Needs Docker Desktop (Mac/Windows) or Docker Engine (Linux), about 4 GB free RAM
 
 ```bash
 cd moneybee/local
-./setup.sh                 # first time: creates secrets and prints your admin login
-docker compose up -d       # first start builds images and takes a few minutes
+./setup.sh                              # first time: creates secrets
+docker compose up -d --remove-orphans   # first start builds images and takes a few minutes
 ```
 
-Open http://localhost:3737 and sign in with the email and password `setup.sh` printed.
-Stop with `docker compose down`; data is kept in Docker volumes (`down -v` deletes it).
-The login service runs at http://dex.localtest.me:5556, a public name that always points to
-your own computer.
+Open http://localhost:3737. The first screen creates your organisation and admin login.
+Login uses the Firebase Auth emulator (local only, ports 9099). Stop with `docker compose down`;
+data is kept in Docker volumes (`down -v` deletes it). If a port is taken, set `APP_PORT=` in `.env`.
+
+**Login and licensing:** OIDC/SSO login is a Marble Enterprise licence feature, so the free version
+must use Firebase Auth. Locally that is the emulator; any hosted deployment needs a real Firebase
+project (free tier). `dex/` is kept only for a future licensed SSO setup.
 
 ## Render services (workspace "My Workspace", region Frankfurt)
 
@@ -63,6 +67,5 @@ add it, or use the OpenSanctions hosted API via `OPENSANCTIONS_API_KEY`, when sc
 
 ## Adding users
 
-Login runs through Dex. Today it has one static admin. To let staff sign in with Google Workspace or
-Microsoft accounts, add a Dex connector in `dex/config.yaml`. Users must also be invited inside the
-app (Settings → Users) with the same email.
+Invite users inside the app (Settings → Users). With a real Firebase project, enable Email/Password
+(and optionally Google or Microsoft sign-in) in the Firebase console.

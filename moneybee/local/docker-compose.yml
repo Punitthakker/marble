@@ -3,11 +3,12 @@
 #   ./setup.sh          (first time only: creates .env and secrets/)
 #   docker compose up -d
 #
-# Then open http://localhost:3737 and sign in with the email and password printed by setup.sh.
+# Then open http://localhost:3737. The first screen creates your organisation and admin login.
 #
-# The login service is reached as dex.localtest.me, a public name that always points to your own
-# computer (127.0.0.1). Inside Docker the same name points at the login container, so the
-# browser and the app use one address.
+# Login uses the Firebase Auth emulator (free, runs in Docker, local use only). It is reached as
+# auth.localtest.me, a public name that always points to your own computer (127.0.0.1). Inside
+# Docker the same name points at the emulator, so the browser and the app use one address.
+# OIDC/SSO login is a Marble Enterprise licence feature, so it is not used here.
 #
 # Port already in use? Add APP_PORT=xxxx to .env, then: docker compose up -d
 
@@ -26,13 +27,10 @@ x-backend-env: &backend-env
   PG_SSL_MODE: disable
   MARBLE_APP_URL: http://localhost:${APP_PORT:-3737}
   AUTHENTICATION_JWT_SIGNING_KEY_FILE: /secrets/jwt.pem
-  AUTH_PROVIDER: oidc
-  AUTH_OIDC_ISSUER: http://dex.localtest.me:5556
-  AUTH_OIDC_CLIENT_ID: moneybee-compliance
-  AUTH_OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
-  AUTH_OIDC_SCOPE: openid,email,profile,offline_access
-  CREATE_ORG_NAME: MoneyBee
-  CREATE_ORG_ADMIN_EMAIL: ${ADMIN_EMAIL}
+  AUTH_PROVIDER: firebase
+  FIREBASE_AUTH_EMULATOR_HOST: auth.localtest.me:9099
+  FIREBASE_PROJECT_ID: test-project
+  FIREBASE_API_KEY: local-emulator
   INGESTION_BUCKET_URL: file:///data/ingestion?create_dir=true
   CASE_MANAGER_BUCKET_URL: file:///data/case-manager?create_dir=true
   ANALYTICS_BUCKET_URL: file:///data/analytics?create_dir=true
@@ -61,26 +59,19 @@ services:
     image: redis:8-alpine
     restart: unless-stopped
 
-  dex:
-    build:
-      context: ../..
-      dockerfile: moneybee/dex/Dockerfile
+  auth:
+    # Firebase Auth emulator published by the Marble team (same image as their dev setup)
+    image: europe-west1-docker.pkg.dev/marble-infra/marble/firebase-emulator:latest
+    platform: linux/amd64
     restart: unless-stopped
-    environment:
-      PORT: "5556"
-      DEX_ISSUER: http://dex.localtest.me:5556
-      DEX_REDIRECT_URI: http://localhost:${APP_PORT:-3737}/oidc/callback
-      DEX_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
-      DEX_ADMIN_EMAIL: ${ADMIN_EMAIL}
-      DEX_ADMIN_HASH: ${ADMIN_PASSWORD_HASH}
     ports:
-      - "5556:5556"
+      - "9099:9099"
     volumes:
-      - dex-data:/var/dex
+      - auth-data:/app/firebase-local-data
     networks:
       default:
         aliases:
-          - dex.localtest.me
+          - auth.localtest.me
 
   migrations:
     <<: *backend-image
@@ -100,7 +91,7 @@ services:
     depends_on:
       migrations:
         condition: service_completed_successfully
-      dex:
+      auth:
         condition: service_started
       redis:
         condition: service_started
@@ -137,6 +128,7 @@ services:
     environment:
       ENV: production
       MARBLE_API_URL: http://api:8080
+      TEST_FIREBASE_AUTH_EMULATOR_HOST: auth.localtest.me:9099
       SESSION_SECRET: ${SESSION_SECRET}
       DISABLE_SEGMENT: "true"
     ports:
@@ -144,5 +136,5 @@ services:
 
 volumes:
   db-data:
-  dex-data:
+  auth-data:
   files:
