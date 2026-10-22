@@ -105,8 +105,8 @@ services:
     entrypoint: ["/app", "--server"]
     environment:
       <<: *backend-env
-    ports:
-      - "8080:8080"
+    # Not published to your computer: the app reaches the API inside Docker.
+    # To call the API from your machine, add:  ports: ["${API_PORT:-8081}:8080"]
     volumes:
       - ./secrets:/secrets:ro
       - files:/data
