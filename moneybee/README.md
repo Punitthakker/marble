@@ -35,7 +35,7 @@ cd moneybee/local
 docker compose up -d       # first start builds images and takes a few minutes
 ```
 
-Open http://localhost:3000 and sign in with the email and password `setup.sh` printed.
+Open http://localhost:3737 and sign in with the email and password `setup.sh` printed.
 Stop with `docker compose down`; data is kept in Docker volumes (`down -v` deletes it).
 The login service runs at http://dex.localtest.me:5556, a public name that always points to
 your own computer.

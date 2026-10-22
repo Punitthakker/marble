@@ -33,7 +33,7 @@ chmod 600 .env
 
 cat <<EOF
 
-Setup done. Your admin login for http://localhost:3000 :
+Setup done. Your admin login for http://localhost:3737 :
   Email:    $ADMIN_EMAIL
   Password: $ADMIN_PASSWORD
 
